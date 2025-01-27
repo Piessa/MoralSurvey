@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="refresh" content="0;url=https://some-service.com/page?id=123">
+    <script>
+        window.location.href = "https://some-service.com/page?id=123";
+    </script>
+</head>
+<body>
+    <p>Redirecting...</p>
+</body>
+</html>
