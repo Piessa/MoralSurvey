@@ -1,15 +1,636 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Moral Journey Survey</title>
     <link rel="icon" href="https://i.seadn.io/gae/KTMWrPShvGnUrsdK6DtFEbgUFTC0CX8ZOKPNAQ6UuamoDKtrNrMUYozamRN_NAGnwV1qhAkMbh3cXX9jmzhs7PNEvM9qjMYfWCTY-iU?auto=format&dpr=1&w=1000" type="image/avif">
-    
-    <!--     <meta http-equiv="refresh" content="0;url=https://script.google.com/macros/s/AKfycbxtnSm-koiMekOvjqs5she25xhhVCM4kb_e80yDKc1veb4Mq5Qa2d58Kx34K6Vtqcfj/exec">
-    <script>
-        window.location.href = "https://script.google.com/macros/s/AKfycbxtnSm-koiMekOvjqs5she25xhhVCM4kb_e80yDKc1veb4Mq5Qa2d58Kx34K6Vtqcfj/exec";
-    </script> -->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #fff;
+            color: #fff;
+        }
+
+        .container {
+            background: #fff;
+            color: #333;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            font-size: 1.2rem;
+        }
+
+        hr {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 30px 50px;
+        }
+
+        .question {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin: 10px 0;
+            text-align: center;
+        }
+
+        input[type="radio"] {
+            margin-right: 10px;
+        }
+
+        button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background: #6e8efb;
+            border: none;
+            border-radius: 5px;
+            color: #fff;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #5a76d6;
+        }
+
+        .thank-you {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .loading-screen {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            z-index: 1000;
+        }
+
+        .loading-screen p {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .spinner {
+            border: 4px solid rgba(0, 0, 0, 0.1);
+            border-left-color: #6e8efb;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+        }
+
+        .img {
+                width: 40px;
+                height: 40px;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        @media (max-width: 1200px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 80px 130px;
+                box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
+            }
+
+            h1 {
+                font-size: 3.8rem;
+            }
+            
+            h2 {
+                margin-bottom: 20px;
+                font-size: 1.7rem;
+            }
+
+            hr {
+                border: none;
+                border-top: 3px solid #ccc;
+                margin: 30px 30px;
+            }
+
+            label {
+                font-size: 3rem;
+            }
+
+            button {
+                font-size: 3rem;
+                padding: 20px 25px;
+            }
+
+            .loading-screen p {
+                font-size: 2.3rem;
+            }
+
+            .spinner {
+                width: 50px;
+                height: 50px;
+            }
+
+            .img {
+                width: 70px;
+                height: 70px;
+            }
+        }
+    </style>
 </head>
 <body>
-    <p>Redirecting...</p>
+    <div class="container">
+        <h1>Moral journey</h1>
+        <hr>
+        <form id="survey-form">
+            <div class="question active" data-id="lang">
+                <button type="button" data-value="en">English</button><br>
+                <button type="button" data-value="it">Italiano</button>
+           </div>
+
+             <!-- Introductive Screens -->
+             <div class="question" data-id="inter0">
+                <label>Hello there and welcome. Thank you for joining :)</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter0-it">
+                <label>Ciao, benvenutə. Grazie per essere qui :)</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter1">
+                <label>What is this for?</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter1-it">
+                <label>A cosa serve?</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter2">
+                <label>What follows aims at having you reflect on what your principles are (if you have any) and on how validly are you reasoning to follow those principles.</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter2-it">
+                <label>Quello che segue ha lo scopo di farti riflettere sui tuoi principi (se ne hai) e su quanto validamente stai ragionando per seguirli.</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter3">
+                <label>This means that acting morally will be henceforth defined as acting following sound reasoning rooted in one's morality. (No, morality is not universal)</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter3-it">
+                <label>Questo significa che agire moralmente sarà d'ora in poi definito come agire seguendo un ragionamento valido radicato nella propria moralità. (No, la moralità non è universale)</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter4">
+                <label>Just to be on the same page..</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter4-it">
+                <label>Per essere sulla stessa lunghezza d'onda..</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter5">
+                <label>Acting morally requires two things:<br><br>
+
+                    - A set of moral principles (or a single principle ruling everything)<br>
+                    - Adequate (sound) moral reasoning to follow those (or that) principles.</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter5-it">
+                <label>Agire moralmente richiede due cose:<br><br>
+
+                    - Un insieme di principi morali (o un singolo principio che governa tutto)<br>
+                    - Un ragionamento morale adeguato (valido) per seguire quei (o quel) principio.</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter6">
+                <label>We will very briefly go through both of them. But first..</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter6-it">
+                <label>Esamineremo molto brevemente entrambi. Ma prima..</label>
+                <button type="button">Next</button>
+            </div>
+            
+
+            <!-- Question 1 -->
+            <div class="question" data-id="q1">
+                <label>Do you even care about acting morally?</label>
+                <button type="button" data-value="yes">Yes</button>
+                <button type="button" data-value="no">No</button>
+            </div>
+
+            <div class="question" data-id="q1-it">
+                <label>È importante per te agire moralmente?</label>
+                <button type="button" data-value="yes">Si</button>
+                <button type="button" data-value="no">No</button>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question" data-id="q2">
+                <label>Are you confident that all of your moral actions, decisions, and opinions reflect your idea of morality, and could you backtrace the moral reasoning behind them to the roots of your morality?</label>
+                <button type="button" data-value="yes">Yes</button>
+                <button type="button" data-value="no">No</button>
+            </div>
+
+            <div class="question" data-id="q2-it">
+                <label>Sei sicuro che tutte le tue azioni, decisioni e opinioni morali riflettano la tua idea di moralità, e potresti risalire al ragionamento morale che le ha generate?</label>
+                <button type="button" data-value="yes">Si</button>
+                <button type="button" data-value="no">No</button>
+            </div>
+
+            <!-- Intermediate Screen 1 -->
+            <div class="question" data-id="inter7">
+                <label>Now that the lame ones are out along with the goat's let's begin.</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter7-it">
+                <label>Ora che i deboli sono fuori insieme ai goat iniziamo.</label>
+                <button type="button">Next</button>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question" data-id="q3">
+                <label>Would you consider your moral to be more..</label>
+                <button type="button" data-value="deontological">Deontological</button>
+                <button type="button" data-value="consequentialist">Consequentialist</button>
+                <button type="button" data-value="egoist">Egoist</button>
+                <button type="button" data-value="dunno">I'm not sure/I don't know what they mean</button>
+            </div>
+
+            <div class="question" data-id="q3-it">
+                <label>Considereresti la tua morale più..</label>
+                <button type="button" data-value="deontological">Deontologica</button>
+                <button type="button" data-value="consequentialist">Consequenzialista</button>
+                <button type="button" data-value="egoist">Egoista</button>
+                <button type="button" data-value="dunno">Non sono sicuro/Non so cosa significhino</button>
+            </div>
+
+            <!-- Intermediate Screen 2 -->
+            <div class="question" data-id="inter8">
+                <label>
+                    <span style="font-size: 1.3em;"><strong>DEONTOLOGY:<br><br></strong></span>This ethical theory involves a set of duties (moral principles) that an individual should fulfill in order to act morally.<br><br>
+                    <strong>That is:</strong> some things are good, some things are bad, always.<br><br>
+                    <strong>Examples:</strong> stealing is wrong, killing is wrong...<br><br>
+                    <strong>Possible problems:</strong> how do we deal with a situation where two principles collide? Who chooses the set of principles?<br><br>
+                    <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/ethics-deontological/" target="_blank">[1]</a>,
+                    <a href="https://www.britannica.com/topic/deontological-ethics" target="_blank">[2]</a>,
+                    <a href="https://en.wikipedia.org/wiki/Deontology" target="_blank">[3]</a>
+                </label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter8-it">
+                <label>
+                    <span style="font-size: 1.3em;"><strong>DEONTOLOGIA:<br><br></strong></span>Questa teoria etica coinvolge un insieme di doveri (principi morali) che un individuo dovrebbe rispettare per agire moralmente.<br><br>
+                    <strong>Cioè:</strong> alcune cose sono buone, alcune cose sono cattive, sempre.<br><br>
+                    <strong>Esempi:</strong> rubare è sbagliato, uccidere è sbagliato...<br><br>
+                    <strong>Possibili problemi:</strong> come affrontiamo una situazione in cui due principi collidono? Chi sceglie l'insieme di principi?<br><br>
+                    <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/ethics-deontological/" target="_blank">[1]</a>,
+                    <a href="https://www.britannica.com/topic/deontological-ethics" target="_blank">[2]</a>,
+                    <a href="https://en.wikipedia.org/wiki/Deontology" target="_blank">[3]</a>
+                </label>
+                <button type="button">Next</button>
+            </div>
+
+            <!-- Intermediate Screen 2 -->
+            <div class="question" data-id="inter9">
+                <label>
+                    <span style="font-size: 1.3em;"><strong>CONSEQUENTIALISM:<br><br></strong></span>This ethical theory wants that actions should be evaluated based on their consequences, specifically on the sum of all "good" produced by each of them.<br><br>
+                    <strong>That is:</strong> good or wrong depends on the context and before each action one should try to predict the sum of all consequences (based on how you see this you could also consider very indirect consequences - perceived intention could be part of them).<br><br>
+                    <strong>Examples:</strong> nuking Israel could save Palestine and thus be a good thing.<br><br>
+                    <strong>Possible problems:</strong> how do we predict all of the consequences? What is "good" anyway?<br><br>
+                    <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/consequentialism/" target="_blank">[1]</a>,
+                    <a href="https://iep.utm.edu/consequentialism-utilitarianism/" target="_blank">[2]</a>,
+                    <a href="https://www.britannica.com/topic/consequentialism" target="_blank">[3]</a>,
+                    <a href="https://en.wikipedia.org/wiki/Consequentialism" target="_blank">[4]</a>
+                </label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter9-it">
+                <label>
+                    <span style="font-size: 1.3em;"><strong>CONSEQUENZIALISMO:<br><br></strong></span>Questa teoria etica vuole che le azioni siano valutate in base alle loro conseguenze, in particolare alla somma di tutto il "bene" prodotto da ciascuna di esse.<br><br>
+                    <strong>Cioè:</strong> bene o male dipende dal contesto e prima di ogni azione si dovrebbe cercare di prevedere la somma di tutte le conseguenze (in base a come vedi questo potresti anche considerare conseguenze molto indirette - l'intenzione percepita potrebbe farne parte).<br><br>
+                    <strong>Esempi:</strong> bombardare Israele potrebbe salvare la Palestina e quindi essere una cosa buona.<br><br>
+                    <strong>Possibili problemi:</strong> come prevediamo tutte le conseguenze? Cos'è il "bene" comunque?<br><br>
+                    <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/consequentialism/" target="_blank">[1]</a>,
+                    <a href="https://iep.utm.edu/consequentialism-utilitarianism/" target="_blank">[2]</a>,
+                    <a href="https://www.britannica.com/topic/consequentialism" target="_blank">[3]</a>,
+                    <a href="https://en.wikipedia.org/wiki/Consequentialism" target="_blank">[4]</a>
+                </label>
+                <button type="button">Next</button>
+            </div>
+
+            <!-- Intermediate Screen 3 -->
+            <div class="question" data-id="inter10">
+                <label>
+                    <span style="font-size: 1.3em;"><strong>EGOISM:<br><br></strong></span>It's a specific consequentialist theory where "good" is calculated based only on the agent's payoff.<br><br>
+                    <strong>That is:</strong> you do what brings you more of whatever you want.<br><br>
+                    <strong>Examples:</strong> I eat the last piece of cake because I want it.<br><br>
+                    <strong>Possible problems:</strong> you can figure these out.<br><br>
+                    <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/egoism/" target="_blank">[1]</a>,
+                    <a href="https://en.wikipedia.org/wiki/Egoism" target="_blank">[2]</a>
+                </label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter10-it">
+                <label>
+                    <span style="font-size: 1.3em;"><strong>EGOISMO:<br><br></strong></span>È una teoria consequenzialista specifica in cui il "bene" è calcolato solo in base al guadagno dell'agente.<br><br>
+                    <strong>Cioè:</strong> fai ciò che ti porta più di ciò che vuoi.<br><br>
+                    <strong>Esempi:</strong> mangio l'ultimo pezzo di torta perché lo voglio.<br><br>
+                    <strong>Possibili problemi:</strong> puoi capirli.<br><br>
+                    <strong>Maggiori informazioni:</strong> <a href="https://plato.stanford.edu/entries/egoism/" target="_blank">[1]</a>,
+                    <a href="https://en.wikipedia.org/wiki/Egoism" target="_blank">[2]</a>
+                </label>
+                <button type="button">Next</button>
+            </div>
+
+            <!-- Intermediate Screen 5 -->
+             <div class="question" data-id="inter11">
+                <label>Now back to the original question..</label>
+                <button type="button">Next</button>
+            </div>
+
+            <div class="question" data-id="inter11-it">
+                <label>Adesso torniamo alla domanda originale..</label>
+                <button type="button">Next</button>
+            </div>
+        </form>
+
+        <!-- Thank You Message -->
+        <div class="thank-you">
+            <p>Thank you for completing the survey!</p>
+        </div>
+
+        <!-- Loading Screen -->
+        <div class="loading-screen">
+            <div class="spinner"></div>
+            <p>Submitting your response...</p>
+        </div>
+    </div>
+    <div style="position: fixed; bottom: 5em; color: #333; text-align: center">
+        <a href="https://www.reddit.com/user/PIESSAlbo/" target="_blank"><img class="img" src="https://i.seadn.io/gae/KTMWrPShvGnUrsdK6DtFEbgUFTC0CX8ZOKPNAQ6UuamoDKtrNrMUYozamRN_NAGnwV1qhAkMbh3cXX9jmzhs7PNEvM9qjMYfWCTY-iU?auto=format&dpr=1&w=1000" alt="Logo" style="border-radius: 50%; object-fit: cover;"></a>
+        <h2>Made by Piessa.</h2>
+    </div>
+    <script>
+        const questions = document.querySelectorAll('.question');
+        const form = document.getElementById('survey-form');
+        const thankYou = document.querySelector('.thank-you');
+        const loadingScreen = document.querySelector('.loading-screen');
+
+        const answers = {};
+
+        window.addEventListener('load', () => {
+            loadingScreen.style.display = 'none';
+        });
+
+        const showQuestion = (id) => {
+            questions.forEach((question) => {
+                question.classList.remove('active');
+                if (question.dataset.id === id) {
+                    question.classList.add('active');
+                }
+            });
+        };
+
+        const collectAnswers = () => {
+            return answers;
+        };
+
+        const submitSurvey = (answers) => {
+            // Show loading screen
+            loadingScreen.style.display = 'flex';
+
+            const formData = new FormData();
+            for (const key in answers) {
+                formData.append(key, answers[key]);
+            }
+
+            fetch("https://script.google.com/macros/s/AKfycbzMGmX9Smf0yTLAOSgI0j3QvKrMgJlNmh3v_Rp_8xX0D7mrePtjjy8p5CsQlRIbK9M2/exec", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(answers),  // Ensure data is sent as JSON
+                mode: "no-cors"  // Prevents CORS errors
+            })
+            .then(() => {
+                console.log("✅ Request sent successfully (no-cors, response not visible).");
+                // Hide loading screen
+                loadingScreen.style.display = 'none';
+
+                // Hide form and show thank-you message
+                form.style.display = 'none';
+                thankYou.style.display = 'block';
+            })
+
+            .catch(error => {
+                console.error("❌ Fetch error:", error);
+            });
+        };
+
+
+        //     google.script.run
+        //         .withSuccessHandler(() => {
+        //             // Hide loading screen
+        //             loadingScreen.style.display = 'none';
+
+        //             // Hide form and show thank-you message
+        //             form.style.display = 'none';
+        //             thankYou.style.display = 'block';
+        //         })
+        //         .withFailureHandler((error) => {
+        //             // Hide loading screen
+        //             loadingScreen.style.display = 'none';
+
+        //             // Show error message
+        //             console.error('Error:', error);
+        //             alert('Submission failed. Please try again.');
+        //         })
+        //         .submitForm(answers);
+        // };
+
+        document.querySelectorAll('.question button').forEach((button) => {
+            button.addEventListener('click', (event) => {
+                const currentQuestion = event.target.closest('.question');
+                const selectedValue = event.target.dataset.value;
+                const currentId = currentQuestion.dataset.id;
+
+                if (selectedValue) {
+                  answers[currentId] = selectedValue;
+                }
+
+                // Check if the current screen is an intermediate screen
+                if (currentId.startsWith('inter')) {
+                    // Logic to determine the next screen based on the current intermediate screen
+                    if (currentId === 'inter0') {
+                        showQuestion('inter1');
+                    } else if (currentId === 'inter0-it') {
+                        showQuestion('inter1-it');
+                    } else if (currentId === 'inter1') {
+                        showQuestion('inter2');
+                    } else if (currentId === 'inter1-it') {
+                        showQuestion('inter2-it');
+                    } else if (currentId === 'inter2') {
+                        showQuestion('inter3');
+                    } else if (currentId === 'inter2-it') {
+                        showQuestion('inter3-it');
+                    } else if (currentId === 'inter3') {
+                        showQuestion('inter4');
+                    } else if (currentId === 'inter3-it') {
+                        showQuestion('inter4-it');
+                    } else if (currentId === 'inter4') {
+                        showQuestion('inter5');
+                    } else if (currentId === 'inter4-it') {
+                        showQuestion('inter5-it');
+                    } else if (currentId === 'inter5') {
+                        showQuestion('inter6');
+                    } else if (currentId === 'inter5-it') {
+                        showQuestion('inter6-it');
+                    } else if (currentId === 'inter6') {
+                        showQuestion('q1');
+                    } else if (currentId === 'inter6-it') {
+                        showQuestion('q1-it');
+                    } else if (currentId === 'inter7') {
+                        showQuestion('q3');
+                    } else if (currentId === 'inter7-it') {
+                        showQuestion('q3-it');
+                    } else if (currentId === 'inter8') {
+                        showQuestion('inter9');
+                    } else if (currentId === 'inter8-it') {
+                        showQuestion('inter9-it');
+                    } else if (currentId === 'inter9') {
+                        showQuestion('inter10');
+                    } else if (currentId === 'inter9-it') {
+                        showQuestion('inter10-it');
+                    } else if (currentId === 'inter10') {
+                        showQuestion('inter11');
+                    } else if (currentId === 'inter10-it') {
+                        showQuestion('inter11-it');
+                    } 
+                    return;
+                }
+
+                if (currentId === 'lang') {
+                    if (selectedValue === 'en') {
+                        showQuestion('inter0');
+                    } else if (selectedValue === 'it') {
+                        showQuestion('inter0-it');
+                    }
+                } else if (currentId === 'q1') {
+                    if (selectedValue === 'yes') {
+                        showQuestion('q2');
+                    } else {
+                        const answers = collectAnswers();
+                        submitSurvey(answers);
+                    }
+                } else if (currentId === 'q1-it') {
+                    if (selectedValue === 'yes') {
+                        showQuestion('q2-it');
+                    } else {
+                        const answers = collectAnswers();
+                        submitSurvey(answers);
+                    }
+                } else if (currentId === 'q2') {
+                    if (selectedValue === 'yes') {
+                        const answers = collectAnswers();
+                        submitSurvey(answers);
+                    } else {
+                        showQuestion('inter7');
+                    }
+                } else if (currentId === 'q2-it') {
+                    if (selectedValue === 'yes') {
+                        const answers = collectAnswers();
+                        submitSurvey(answers);
+                    } else {
+                        showQuestion('inter7-it');
+                    }
+                } else if (currentId === 'q3') {
+                    if (selectedValue === 'dunno') {
+                        showQuestion('inter8');
+                    } else {
+                        const answers = collectAnswers();
+                        submitSurvey(answers);
+                    }
+                } else if (currentId === 'q3-it') {
+                    if (selectedValue === 'dunno') {
+                        showQuestion('inter8-it');
+                    } else {
+                        const answers = collectAnswers();
+                        submitSurvey(answers);
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 </html>
