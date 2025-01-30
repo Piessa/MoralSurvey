@@ -529,27 +529,6 @@
             });
         };
 
-
-        //     google.script.run
-        //         .withSuccessHandler(() => {
-        //             // Hide loading screen
-        //             loadingScreen.style.display = 'none';
-
-        //             // Hide form and show thank-you message
-        //             form.style.display = 'none';
-        //             thankYou.style.display = 'block';
-        //         })
-        //         .withFailureHandler((error) => {
-        //             // Hide loading screen
-        //             loadingScreen.style.display = 'none';
-
-        //             // Show error message
-        //             console.error('Error:', error);
-        //             alert('Submission failed. Please try again.');
-        //         })
-        //         .submitForm(answers);
-        // };
-
         document.querySelectorAll('.question button').forEach((button) => {
             button.addEventListener('click', (event) => {
                 const currentQuestion = event.target.closest('.question');
