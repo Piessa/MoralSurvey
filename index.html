@@ -1,17 +1,44 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <!--   ! YOU SHOULD NOT BE HERE !   
     Everything that follows is to be considered my exclusive intellectual property.    
     -->
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Moral Journey Survey</title>
-    <link rel="icon" href="https://i.seadn.io/gae/KTMWrPShvGnUrsdK6DtFEbgUFTC0CX8ZOKPNAQ6UuamoDKtrNrMUYozamRN_NAGnwV1qhAkMbh3cXX9jmzhs7PNEvM9qjMYfWCTY-iU?auto=format&dpr=1&w=1000" type="image/avif">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Moral Journey Survey</title>
+        <link rel="icon" href="https://i.seadn.io/gae/KTMWrPShvGnUrsdK6DtFEbgUFTC0CX8ZOKPNAQ6UuamoDKtrNrMUYozamRN_NAGnwV1qhAkMbh3cXX9jmzhs7PNEvM9qjMYfWCTY-iU?auto=format&dpr=1&w=1000" type="image/avif">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100..900&display=swap" rel="stylesheet">
+        <script type="importmap">
+            {
+              "imports": {
+                "@material/web/": "https://esm.run/@material/web/"
+              }
+            }
+        </script>
+        <script type="module">
+            import '@material/web/button/filled-button.js';
+            import '@material/web/progress/circular-progress.js';
+    </script>
+    <script>
+        const test = false;
+    </script>
     <style>
+        :root {
+            --md-sys-color-primary: #caeea6;               /*  #334478;  */
+            --md-sys-color-on-primary: #334e18;            /*  #dbe1ff;  */
+            --md-sys-color-background: #dbe7c8;            /*  #dbe1ff;  */
+            --md-sys-color-surface: #1e4e4c;               /*  #ffd6f8;  */
+            --md-sys-color-on-surface: #bbece9;            /*  #5a3d58;  */
+            --md-circular-progress-active-indicator-color: var(--md-sys-color-surface);
+            --md-sys-shape-corner-extra-large: 28px;
+            --md-sys-shape-corner-medium: 16px;
+        }
+
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Roboto', sans-serif;
             margin: 0;
             padding: 0;
             display: flex;
@@ -19,36 +46,38 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            background: #fff;
-            color: #333; /* Set text color to dark for better readability */
+            background: var(--md-sys-color-background);
+            color: var(--md-sys-color-on-surface);
         }
 
         .container {
-            background: #fff;
-            color: #333;
-            border-radius: 10px;
-            padding: 20px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-            max-width: 100%; /* Allow it to stretch in larger viewports */
-            width: 60%;
+            background: var(--md-sys-color-surface);
+            border-radius: var(--md-sys-shape-corner-extra-large);
+            padding: 24px;
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 70%;
             text-align: center;
-            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            /* elevation: 3; */
         }
 
         h1 {
-            margin-bottom: 20px;
-            font-size: 2rem; /* Slightly smaller for better readability on smaller screens */
+            margin-bottom: 24px;
+            font-size: 2rem;
+            color: var(--md-sys-color-primary);
         }
 
         h2 {
-            margin-bottom: 20px;
+            margin-bottom: 16px;
             font-size: 1.2rem;
+            color: var(--md-sys-color-surface);
         }
 
-        hr {
-            border: none;
-            border-top: 1px solid #ccc;
-            margin: 30px 50px;
+        a {
+            color: var(--md-sys-color-primary);
         }
 
         .question {
@@ -62,30 +91,24 @@
 
         label {
             display: block;
-            margin: 10px 0;
-            text-align: center;
-        }
-
-        button {
-            margin-top: 15px;
-            margin-left: 10px;
-            padding: 10px 20px;
-            background: #6e8efb;
-            border: none;
-            border-radius: 5px;
-            color: #fff;
+            margin: 16px 0;
             font-size: 1rem;
-            cursor: pointer;
-            transition: background 0.3s;
+            color: var(--md-sys-color-on-surface);
         }
 
-        button:hover {
-            background: #5a76d6;
+        md-filled-button {
+            margin-top: 10px;
+            margin-left: 5px;
+            font-size: 1rem;
+            --md-filled-button-container-color: var(--md-sys-color-primary);
+            --md-filled-button-label-text-color: var(--md-sys-color-on-primary);
         }
 
         .thank-you {
             display: none;
             animation: fadeIn 0.5s ease;
+            font-size: 1.2rem;
+            color: var(--md-sys-color-on-surface);
         }
 
         .loading-screen {
@@ -95,7 +118,7 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(255, 255, 255, 0.9);
+            background: #dbe7c8d2;
             justify-content: center;
             align-items: center;
             flex-direction: column;
@@ -103,29 +126,9 @@
         }
 
         .loading-screen p {
-            margin-top: 10px;
+            margin-top: 16px;
             font-size: 1.2rem;
-            color: #333;
-        }
-
-        .spinner {
-            border: 4px solid rgba(0, 0, 0, 0.1);
-            border-left-color: #6e8efb;
-            border-radius: 50%;
-            width: 40px;
-            height: 40px;
-            animation: spin 1s linear infinite;
-        }
-
-        .img {
-            width: 40px;
-            height: 40px;
-        }
-
-        @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            color: var(--md-sys-color-surface);
         }
 
         @keyframes fadeIn {
@@ -139,152 +142,97 @@
             }
         }
 
-        /* Mobile-first media queries */
+        .img {
+            width: 40px;
+            height: 40px;
+        }
+
         @media (min-width: 768px) {
             h1 {
                 font-size: 2.5rem;
             }
-
             h2 {
                 font-size: 1.5rem;
             }
-
             label {
-                font-size: 1.2rem;
-            }
-
-            button {
-                font-size: 1.2rem;
+                font-size: 1.4rem;
             }
         }
 
         @media (min-width: 1024px) {
             .container {
-                padding: 20px; /* Reduced padding for a smaller appearance */
-                width: 60%; /* Slightly thinner container */
+                padding: 32px;
+                width: 60%;
             }
-
             h1 {
-                font-size: 2.2rem; /* Smaller font size for better balance */
+                font-size: 2.2rem;
             }
-
             h2 {
-                font-size: 1.4rem; /* Smaller heading for a balanced design */
-            }
-
-            label {
                 font-size: 1.4rem;
-            }
-
-            button {
-                font-size: 1.3rem; /* Slightly smaller button text */
-            }
-        }
-
-        @media (min-width: 1200px) {
-            .container {
-                padding: 30px; /* Less padding for a more compact container */
-                width: 37%; /* Thinner container on large screens */
-                box-shadow: 0 15px 10px rgba(0, 0, 0, 0.2);
-            }
-
-            h1 {
-                font-size: 2.8rem; /* Slightly smaller heading size */
-            }
-
-            h2 {
-                font-size: 1.6rem; /* Balanced heading size */
-            }
-
-            hr {
-                border-top: 3px solid #ccc;
-                margin: 30px 30px;
-            }
-
-            label {
-                font-size: 1.8rem;
-            }
-
-            button {
-                font-size: 1.5rem;
-                padding: 12px 15px;
-            }
-
-            .loading-screen p {
-                font-size: 2.3rem;
-            }
-
-            .spinner {
-                width: 45px;
-                height: 45px;
-            }
-
-            .img {
-                width: 60px;
-                height: 60px;
             }
         }
     </style>
 </head>
-<body>
+
+    </head>
+    <body>
     <div class="container">
-        <h1>Moral journey</h1>
-        <hr>
         <form id="survey-form">
             <div class="question active" data-id="lang">
-                <button type="button" data-value="en">English</button><br>
-                <button type="button" data-value="it">Italiano</button>
+                <h1>A Moral Journey</h1>
+                <md-filled-button type="button" data-value="en">English</md-filled-button>
+                <md-filled-button type="button" data-value="it">Italiano</md-filled-button>
            </div>
 
              <!-- Introductive Screens -->
              <div class="question" data-id="inter0">
                 <label>Hello there and welcome. Thank you for joining :)</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter0-it">
+            <div class="question" data-id="inter0_it">
                 <label>Ciao, benvenutə. Grazie per essere qui :)</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <div class="question" data-id="inter1">
                 <label>What is this for?</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter1-it">
+            <div class="question" data-id="inter1_it">
                 <label>A cosa serve?</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <div class="question" data-id="inter2">
                 <label>What follows aims at having you reflect on what your principles are (if you have any) and on how validly are you reasoning to follow those principles.</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter2-it">
+            <div class="question" data-id="inter2_it">
                 <label>Quello che segue ha lo scopo di farti riflettere sui tuoi principi (se ne hai) e su quanto validamente stai ragionando per seguirli.</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <div class="question" data-id="inter3">
                 <label>This means that acting morally will be henceforth defined as acting following sound reasoning rooted in one's morality. (No, morality is not universal)</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter3-it">
+            <div class="question" data-id="inter3_it">
                 <label>Questo significa che agire moralmente sarà d'ora in poi definito come agire seguendo un ragionamento valido radicato nella propria moralità. (No, la moralità non è universale)</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <div class="question" data-id="inter4">
                 <label>Just to be on the same page..</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter4-it">
+            <div class="question" data-id="inter4_it">
                 <label>Per essere sulla stessa lunghezza d'onda..</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <div class="question" data-id="inter5">
@@ -292,80 +240,80 @@
 
                     - A set of moral principles (or a single principle ruling everything)<br>
                     - Adequate (sound) moral reasoning to follow those (or that) principles.</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter5-it">
+            <div class="question" data-id="inter5_it">
                 <label>Agire moralmente richiede due cose:<br><br>
 
                     - Un insieme di principi morali (o un singolo principio che governa tutto)<br>
                     - Un ragionamento morale adeguato (valido) per seguire quei (o quel) principio.</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <div class="question" data-id="inter6">
                 <label>We will very briefly go through both of them. But first..</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter6-it">
+            <div class="question" data-id="inter6_it">
                 <label>Esamineremo molto brevemente entrambi. Ma prima..</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
             
 
             <!-- Question 1 -->
             <div class="question" data-id="q1">
                 <label>Do you even care about acting morally?</label>
-                <button type="button" data-value="yes">Yes</button>
-                <button type="button" data-value="no">No</button>
+                <md-filled-button type="button" data-value="yes">Yes</md-filled-button>
+                <md-filled-button type="button" data-value="no">No</md-filled-button>
             </div>
 
-            <div class="question" data-id="q1-it">
+            <div class="question" data-id="q1_it">
                 <label>È importante per te agire moralmente?</label>
-                <button type="button" data-value="yes">Si</button>
-                <button type="button" data-value="no">No</button>
+                <md-filled-button type="button" data-value="yes">Si</md-filled-button>
+                <md-filled-button type="button" data-value="no">No</md-filled-button>
             </div>
 
             <!-- Question 2 -->
             <div class="question" data-id="q2">
                 <label>Are you confident that all of your moral actions, decisions, and opinions reflect your idea of morality, and could you backtrace the moral reasoning behind them to the roots of your morality?</label>
-                <button type="button" data-value="yes">Yes</button>
-                <button type="button" data-value="no">No</button>
+                <md-filled-button type="button" data-value="yes">Yes</md-filled-button>
+                <md-filled-button type="button" data-value="no">No</md-filled-button>
             </div>
 
-            <div class="question" data-id="q2-it">
+            <div class="question" data-id="q2_it">
                 <label>Sei sicuro che tutte le tue azioni, decisioni e opinioni morali riflettano la tua idea di moralità, e potresti risalire al ragionamento morale che le ha generate?</label>
-                <button type="button" data-value="yes">Si</button>
-                <button type="button" data-value="no">No</button>
+                <md-filled-button type="button" data-value="yes">Si</md-filled-button>
+                <md-filled-button type="button" data-value="no">No</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 1 -->
             <div class="question" data-id="inter7">
                 <label>Now that the lame ones are out along with the goat's let's begin.</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter7-it">
+            <div class="question" data-id="inter7_it">
                 <label>Ora che i deboli sono fuori insieme ai goat iniziamo.</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <!-- Question 3 -->
             <div class="question" data-id="q3">
                 <label>Would you consider your moral to be more..</label>
-                <button type="button" data-value="deontological">Deontological</button>
-                <button type="button" data-value="consequentialist">Consequentialist</button>
-                <button type="button" data-value="egoist">Egoist</button>
-                <button type="button" data-value="dunno">I'm not sure/I don't know what they mean</button>
+                <md-filled-button type="button" data-value="deontological">Deontological</md-filled-button><br>
+                <md-filled-button type="button" data-value="consequentialist">Consequentialist</md-filled-button><br>
+                <md-filled-button type="button" data-value="egoist">Egoist</md-filled-button><br>
+                <md-filled-button type="button" data-value="dunno">I'm not sure or<br>I don't know what they mean</md-filled-button>
             </div>
 
-            <div class="question" data-id="q3-it">
+            <div class="question" data-id="q3_it">
                 <label>Considereresti la tua morale più..</label>
-                <button type="button" data-value="deontological">Deontologica</button>
-                <button type="button" data-value="consequentialist">Consequenzialista</button>
-                <button type="button" data-value="egoist">Egoista</button>
-                <button type="button" data-value="dunno">Non sono sicuro/Non so cosa significhino</button>
+                <md-filled-button type="button" data-value="deontological">Deontologica</md-filled-button><br>
+                <md-filled-button type="button" data-value="consequentialist">Consequenzialista</md-filled-button><br>
+                <md-filled-button type="button" data-value="egoist">Egoista</md-filled-button><br>
+                <md-filled-button type="button" data-value="dunno">Non sono sicuro o<br>non so cosa significhino</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 2 -->
@@ -379,10 +327,10 @@
                     <a href="https://www.britannica.com/topic/deontological-ethics" target="_blank">[2]</a>,
                     <a href="https://en.wikipedia.org/wiki/Deontology" target="_blank">[3]</a>
                 </label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter8-it">
+            <div class="question" data-id="inter8_it">
                 <label>
                     <span style="font-size: 1.3em;"><strong>DEONTOLOGIA:<br><br></strong></span>Questa teoria etica coinvolge un insieme di doveri (principi morali) che un individuo dovrebbe rispettare per agire moralmente.<br><br>
                     <strong>Cioè:</strong> alcune cose sono buone, alcune cose sono cattive, sempre.<br><br>
@@ -392,7 +340,7 @@
                     <a href="https://www.britannica.com/topic/deontological-ethics" target="_blank">[2]</a>,
                     <a href="https://en.wikipedia.org/wiki/Deontology" target="_blank">[3]</a>
                 </label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 2 -->
@@ -407,10 +355,10 @@
                     <a href="https://www.britannica.com/topic/consequentialism" target="_blank">[3]</a>,
                     <a href="https://en.wikipedia.org/wiki/Consequentialism" target="_blank">[4]</a>
                 </label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter9-it">
+            <div class="question" data-id="inter9_it">
                 <label>
                     <span style="font-size: 1.3em;"><strong>CONSEQUENZIALISMO:<br><br></strong></span>Questa teoria etica vuole che le azioni siano valutate in base alle loro conseguenze, in particolare alla somma di tutto il "bene" prodotto da ciascuna di esse.<br><br>
                     <strong>Cioè:</strong> bene o male dipende dal contesto e prima di ogni azione si dovrebbe cercare di prevedere la somma di tutte le conseguenze (in base a come vedi questo potresti anche considerare conseguenze molto indirette - l'intenzione percepita potrebbe farne parte).<br><br>
@@ -421,7 +369,7 @@
                     <a href="https://www.britannica.com/topic/consequentialism" target="_blank">[3]</a>,
                     <a href="https://en.wikipedia.org/wiki/Consequentialism" target="_blank">[4]</a>
                 </label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 3 -->
@@ -434,10 +382,10 @@
                     <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/egoism/" target="_blank">[1]</a>,
                     <a href="https://en.wikipedia.org/wiki/Egoism" target="_blank">[2]</a>
                 </label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter10-it">
+            <div class="question" data-id="inter10_it">
                 <label>
                     <span style="font-size: 1.3em;"><strong>EGOISMO:<br><br></strong></span>È una teoria consequenzialista specifica in cui il "bene" è calcolato solo in base al guadagno dell'agente.<br><br>
                     <strong>Cioè:</strong> fai ciò che ti porta più di ciò che vuoi.<br><br>
@@ -446,18 +394,18 @@
                     <strong>Maggiori informazioni:</strong> <a href="https://plato.stanford.edu/entries/egoism/" target="_blank">[1]</a>,
                     <a href="https://en.wikipedia.org/wiki/Egoism" target="_blank">[2]</a>
                 </label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 5 -->
              <div class="question" data-id="inter11">
                 <label>Now back to the original question..</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter11-it">
+            <div class="question" data-id="inter11_it">
                 <label>Adesso torniamo alla domanda originale..</label>
-                <button type="button">Next</button>
+                <md-filled-button type="button">Avanti</md-filled-button>
             </div>
         </form>
 
@@ -465,14 +413,15 @@
         <div class="thank-you">
             <p>Thank you for completing the survey!</p>
         </div>
-
-        <!-- Loading Screen -->
-        <div class="loading-screen">
-            <div class="spinner"></div>
-            <p>Submitting your response...</p>
-        </div>
     </div>
-    <div style="position: fixed; bottom: 5em; color: #333; text-align: center">
+
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <md-circular-progress indeterminate></md-circular-progress>
+        <p>Submitting your response...</p>
+    </div>
+
+    <div style="position: fixed; bottom: 20px; color: #333; text-align: center; z-index: -1">
         <a href="https://www.reddit.com/user/PIESSAlbo/" target="_blank"><img class="img" src="https://i.seadn.io/gae/KTMWrPShvGnUrsdK6DtFEbgUFTC0CX8ZOKPNAQ6UuamoDKtrNrMUYozamRN_NAGnwV1qhAkMbh3cXX9jmzhs7PNEvM9qjMYfWCTY-iU?auto=format&dpr=1&w=1000" alt="Logo" style="border-radius: 50%; object-fit: cover;"></a>
         <h2>Made by Piessa.</h2>
     </div>
@@ -505,6 +454,9 @@
             // Show loading screen
             loadingScreen.style.display = 'flex';
 
+            if (test) {
+                answers.lang = 'test';
+            }
             const formData = new FormData();
             for (const key in answers) {
                 formData.append(key, answers[key]);
@@ -533,111 +485,79 @@
             });
         };
 
-        document.querySelectorAll('.question button').forEach((button) => {
+        // Step 1: Define a configuration object for transitions
+        const transitions = {
+            lang: {
+                en: 'inter0',
+                it: 'inter0_it'
+            },
+            inter0: 'inter1',
+            inter0_it: 'inter1_it',
+            inter1: 'inter2',
+            inter1_it: 'inter2_it',
+            inter2: 'inter3',
+            inter2_it: 'inter3_it',
+            inter3: 'inter4',
+            inter3_it: 'inter4_it',
+            inter4: 'inter5',
+            inter4_it: 'inter5_it',
+            inter5: 'inter6',
+            inter5_it: 'inter6_it',
+            inter6: 'q1',
+            inter6_it: 'q1_it',
+            inter7: 'q3',
+            inter7_it: 'q3_it',
+            inter8: 'inter9',
+            inter8_it: 'inter9_it',
+            inter9: 'inter10',
+            inter9_it: 'inter10_it',
+            inter10: 'inter11',
+            inter10_it: 'inter11_it'
+        };
+
+        document.querySelectorAll('.question md-filled-button').forEach((button) => {
             button.addEventListener('click', (event) => {
                 const currentQuestion = event.target.closest('.question');
                 const selectedValue = event.target.dataset.value;
                 const currentId = currentQuestion.dataset.id;
+                if (selectedValue) answers[currentId] = selectedValue;
 
-                if (selectedValue) {
-                  answers[currentId] = selectedValue;
-                }
-
-                // Check if the current screen is an intermediate screen
-                if (currentId.startsWith('inter')) {
-                    // Logic to determine the next screen based on the current intermediate screen
-                    if (currentId === 'inter0') {
-                        showQuestion('inter1');
-                    } else if (currentId === 'inter0-it') {
-                        showQuestion('inter1-it');
-                    } else if (currentId === 'inter1') {
-                        showQuestion('inter2');
-                    } else if (currentId === 'inter1-it') {
-                        showQuestion('inter2-it');
-                    } else if (currentId === 'inter2') {
-                        showQuestion('inter3');
-                    } else if (currentId === 'inter2-it') {
-                        showQuestion('inter3-it');
-                    } else if (currentId === 'inter3') {
-                        showQuestion('inter4');
-                    } else if (currentId === 'inter3-it') {
-                        showQuestion('inter4-it');
-                    } else if (currentId === 'inter4') {
-                        showQuestion('inter5');
-                    } else if (currentId === 'inter4-it') {
-                        showQuestion('inter5-it');
-                    } else if (currentId === 'inter5') {
-                        showQuestion('inter6');
-                    } else if (currentId === 'inter5-it') {
-                        showQuestion('inter6-it');
-                    } else if (currentId === 'inter6') {
-                        showQuestion('q1');
-                    } else if (currentId === 'inter6-it') {
-                        showQuestion('q1-it');
-                    } else if (currentId === 'inter7') {
-                        showQuestion('q3');
-                    } else if (currentId === 'inter7-it') {
-                        showQuestion('q3-it');
-                    } else if (currentId === 'inter8') {
-                        showQuestion('inter9');
-                    } else if (currentId === 'inter8-it') {
-                        showQuestion('inter9-it');
-                    } else if (currentId === 'inter9') {
-                        showQuestion('inter10');
-                    } else if (currentId === 'inter9-it') {
-                        showQuestion('inter10-it');
-                    } else if (currentId === 'inter10') {
-                        showQuestion('inter11');
-                    } else if (currentId === 'inter10-it') {
-                        showQuestion('inter11-it');
-                    } 
+                // Step 2: Use our transitions object for next screen if it exists
+                const next = transitions[currentId]?.[selectedValue] || transitions[currentId];
+                if (next) {
+                    showQuestion(next);
                     return;
                 }
 
-                if (currentId === 'lang') {
-                    if (selectedValue === 'en') {
-                        showQuestion('inter0');
-                    } else if (selectedValue === 'it') {
-                        showQuestion('inter0-it');
-                    }
-                } else if (currentId === 'q1') {
+                // Step 3: Keep other logic unchanged for final survey submission
+                if (currentId === 'q1' || currentId === 'q1_it') {
                     if (selectedValue === 'yes') {
-                        showQuestion('q2');
+                        if (answers.lang === 'en') {
+                            showQuestion('q2');
+                        } else {
+                            showQuestion('q2_it');
+                        }
                     } else {
                         const answers = collectAnswers();
                         submitSurvey(answers);
                     }
-                } else if (currentId === 'q1-it') {
-                    if (selectedValue === 'yes') {
-                        showQuestion('q2-it');
-                    } else {
-                        const answers = collectAnswers();
-                        submitSurvey(answers);
-                    }
-                } else if (currentId === 'q2') {
+                } else if (currentId === 'q2' || currentId === 'q2_it') {
                     if (selectedValue === 'yes') {
                         const answers = collectAnswers();
                         submitSurvey(answers);
                     } else {
-                        showQuestion('inter7');
-                    }
-                } else if (currentId === 'q2-it') {
-                    if (selectedValue === 'yes') {
-                        const answers = collectAnswers();
-                        submitSurvey(answers);
-                    } else {
-                        showQuestion('inter7-it');
-                    }
-                } else if (currentId === 'q3') {
+                        if (answers.lang === 'en') {
+                            showQuestion('inter7');
+                        } else {
+                            showQuestion('inter7_it');
+                    }}
+                } else if (currentId === 'q3' || currentId === 'q3_it') {
                     if (selectedValue === 'dunno') {
-                        showQuestion('inter8');
-                    } else {
-                        const answers = collectAnswers();
-                        submitSurvey(answers);
-                    }
-                } else if (currentId === 'q3-it') {
-                    if (selectedValue === 'dunno') {
-                        showQuestion('inter8-it');
+                        if (answers.lang === 'en') {
+                            showQuestion('inter8');
+                        } else {
+                            showQuestion('inter8_it');
+                        }
                     } else {
                         const answers = collectAnswers();
                         submitSurvey(answers);
