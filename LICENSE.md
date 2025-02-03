@@ -12,7 +12,7 @@ Redistribution and use in source form are permitted provided that the following 
   **Intellectual Property Notice (Non-code Text Content):**
 
 All non-code text content included in this distribution, specifically the content of the survey form including but not limited to questions, possible answers and information screens (henceforth "Content"), is the exclusive property of Alberto Roggero and is protected by copyright and other intellectual property laws.
-This license grants no rights or licenses to the Content. Any use, reproduction, or distribution of the Content without the express written permission of Alberto Roggero is strictly prohibited.
+This license grants no rights or licenses to the Content. Any use, reproduction, or distribution of the Content outside this software without the express written permission of Alberto Roggero is strictly prohibited.
 
   **Translation Notice:**
 
