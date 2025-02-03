@@ -32,7 +32,7 @@
             --md-sys-color-background: #dbe7c8;            /*  #dbe1ff;  */
             --md-sys-color-surface: #1e4e4c;               /*  #ffd6f8;  */
             --md-sys-color-on-surface: #bbece9;            /*  #5a3d58;  */
-            --md-circular-progress-active-indicator-color: var(--md-sys-color-surface);
+            --md-circular-progress-active-indicator-color: var(--md-sys-color-on-surface);
             --md-sys-shape-corner-extra-large: 28px;
             --md-sys-shape-corner-medium: 16px;
         }
@@ -54,6 +54,7 @@
             background: var(--md-sys-color-surface);
             border-radius: var(--md-sys-shape-corner-extra-large);
             padding: 24px;
+            margin-top: -10vh; /* Moves it higher */
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             max-width: 600px;
             width: 70%;
@@ -61,6 +62,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            z-index: 1;
             /* elevation: 3; */
         }
 
@@ -82,7 +84,12 @@
 
         .question {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 400ms cubic-bezier(0.2, 0, 0, 1) both;
+        }
+
+        .question.welcome {
+            display: none;
+            animation: none;
         }
 
         .question.active {
@@ -106,39 +113,32 @@
 
         .thank-you {
             display: none;
-            animation: fadeIn 0.5s ease;
+            animation: fadeIn 0.7s ease;
             font-size: 1.2rem;
             color: var(--md-sys-color-on-surface);
         }
 
         .loading-screen {
             display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: #dbe7c8d2;
             justify-content: center;
             align-items: center;
             flex-direction: column;
-            z-index: 1000;
         }
 
         .loading-screen p {
             margin-top: 16px;
             font-size: 1.2rem;
-            color: var(--md-sys-color-surface);
+            color: var(--md-sys-color-on-surface);
         }
 
         @keyframes fadeIn {
             from {
                 opacity: 0;
-                transform: translateY(20px);
+                transform: translateX(40px);
             }
             to {
                 opacity: 1;
-                transform: translateY(0);
+                transform: translateX(0);
             }
         }
 
@@ -178,7 +178,7 @@
     <body>
     <div class="container">
         <form id="survey-form">
-            <div class="question active" data-id="lang">
+            <div class="question welcome active" data-id="lang">
                 <h1>A Moral Journey</h1>
                 <md-filled-button type="button" data-value="en">English</md-filled-button>
                 <md-filled-button type="button" data-value="it">Italiano</md-filled-button>
@@ -413,18 +413,22 @@
         <div class="thank-you">
             <p>Thank you for completing the survey!</p>
         </div>
+        
+        <!-- Loading Screen -->
+        <div class="loading-screen">
+            <md-circular-progress indeterminate></md-circular-progress>
+            <p>Submitting your response...</p>
+        </div>
     </div>
 
-    <!-- Loading Screen -->
-    <div class="loading-screen">
-        <md-circular-progress indeterminate></md-circular-progress>
-        <p>Submitting your response...</p>
-    </div>
-
-    <div style="position: fixed; bottom: 20px; color: #333; text-align: center; z-index: -1">
+    <div style="position: fixed; bottom: 20px; text-align: center; z-index: 0">
         <a href="https://www.reddit.com/user/PIESSAlbo/" target="_blank"><img class="img" src="https://i.seadn.io/gae/KTMWrPShvGnUrsdK6DtFEbgUFTC0CX8ZOKPNAQ6UuamoDKtrNrMUYozamRN_NAGnwV1qhAkMbh3cXX9jmzhs7PNEvM9qjMYfWCTY-iU?auto=format&dpr=1&w=1000" alt="Logo" style="border-radius: 50%; object-fit: cover;"></a>
         <h2>Made by Piessa.</h2>
     </div>
+
+    
+
+    
     <script>
         const questions = document.querySelectorAll('.question');
         const form = document.getElementById('survey-form');
@@ -452,6 +456,7 @@
 
         const submitSurvey = (answers) => {
             // Show loading screen
+            form.style.display = 'none';
             loadingScreen.style.display = 'flex';
 
             if (test) {
@@ -476,7 +481,6 @@
                 loadingScreen.style.display = 'none';
 
                 // Hide form and show thank-you message
-                form.style.display = 'none';
                 thankYou.style.display = 'block';
             })
 
