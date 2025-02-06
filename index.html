@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
-<!--   Copyright (c) 2025 Alberto Roggero
-       License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main/LICENSE.md
+<!--
+------------------------------------------
+Copyright (c) 2025 Alberto Roggero
+License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main/LICENSE.md
+------------------------------------------
 -->
     <head>
         <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
@@ -59,7 +62,7 @@
             background: var(--md-sys-color-surface);
             border-radius: var(--md-sys-shape-corner-extra-large);
             padding: 24px;
-            margin-top: -10vh; /* Moves it higher */
+            margin-top: -10vh;
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             max-width: 600px;
             width: 70%;
@@ -118,7 +121,7 @@
 
         .thank-you {
             display: none;
-            animation: fadeIn 0.7s ease;
+            animation: fadeIn 400ms cubic-bezier(0.2, 0, 0, 1) both;
             font-size: 1.2rem;
             color: var(--md-sys-color-on-surface);
         }
@@ -185,145 +188,111 @@
         <form id="survey-form">
             <div class="question welcome active" data-id="lang">
                 <h1>A Moral Journey</h1>
-                <md-filled-button type="button" data-value="en">English</md-filled-button>
-                <md-filled-button type="button" data-value="it">Italiano</md-filled-button>
+                <md-filled-button id="lang_b1" type="button" data-value="en">English</md-filled-button>
+                <md-filled-button id="lang_b2" type="button" data-value="it">Italiano</md-filled-button>
            </div>
 
              <!-- Introductive Screens -->
              <div class="question" data-id="inter0">
-                <label>Hello there and welcome. Thank you for joining :)</label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter0_it">
-                <label>Ciao, benvenutə. Grazie per essere qui :)</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <label id="inter0">Hello there and welcome. Thank you for joining :)</label>
+                <md-filled-button id="inter0_b" type="button">Next</md-filled-button>
             </div>
 
             <div class="question" data-id="inter1">
-                <label>What is this for?</label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter1_it">
-                <label>A cosa serve?</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <label id="inter1">What is this for?</label>
+                <md-filled-button id="inter1_b" type="button">Next</md-filled-button>
             </div>
 
             <div class="question" data-id="inter2">
-                <label>What follows aims at having you reflect on what your principles are (if you have any) and on how validly are you reasoning to follow those principles.</label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter2_it">
-                <label>Quello che segue ha lo scopo di farti riflettere sui tuoi principi (se ne hai) e su quanto validamente stai ragionando per seguirli.</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <label id="inter2">What follows aims at having you reflect on what your principles are (if you have any) and on how validly are you reasoning to follow those principles.</label>
+                <md-filled-button id="inter2_b" type="button">Next</md-filled-button>
             </div>
 
             <div class="question" data-id="inter3">
-                <label>This means that acting morally will be henceforth defined as acting following sound reasoning rooted in one's morality. (No, morality is not universal)</label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter3_it">
-                <label>Questo significa che agire moralmente sarà d'ora in poi definito come agire seguendo un ragionamento valido radicato nella propria moralità. (No, la moralità non è universale)</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <label id="inter3">This means that acting morally will be henceforth defined as acting following sound reasoning rooted in one's morality. (No, morality is not universal)</label>
+                <md-filled-button id="inter3_b" type="button">Next</md-filled-button>
             </div>
 
             <div class="question" data-id="inter4">
-                <label>Just to be on the same page..</label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter4_it">
-                <label>Per essere sulla stessa lunghezza d'onda..</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <label id="inter4">Just to be on the same page..</label>
+                <md-filled-button id="inter4_b" type="button">Next</md-filled-button>
             </div>
 
             <div class="question" data-id="inter5">
-                <label>Acting morally requires two things:<br><br>
+                <label id="inter5">Acting morally requires two things:<br><br>
 
                     - A set of moral principles (or a single principle ruling everything)<br>
                     - Adequate (sound) moral reasoning to follow those (or that) principles.</label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter5_it">
-                <label>Agire moralmente richiede due cose:<br><br>
-
-                    - Un insieme di principi morali (o un singolo principio che governa tutto)<br>
-                    - Un ragionamento morale adeguato (valido) per seguire quei (o quel) principio.</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <md-filled-button id="inter5_b" type="button">Next</md-filled-button>
             </div>
 
             <div class="question" data-id="inter6">
-                <label>We will very briefly go through both of them. But first..</label>
-                <md-filled-button type="button">Next</md-filled-button>
+                <label id="inter6">We will very briefly go through both of them. But first..</label>
+                <md-filled-button id="inter6_b" type="button">Next</md-filled-button>
             </div>
-
-            <div class="question" data-id="inter6_it">
-                <label>Esamineremo molto brevemente entrambi. Ma prima..</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
-            </div>
-            
 
             <!-- Question 1 -->
             <div class="question" data-id="q1">
-                <label>Do you even care about acting morally?</label>
-                <md-filled-button type="button" data-value="yes">Yes</md-filled-button>
-                <md-filled-button type="button" data-value="no">No</md-filled-button>
+                <label id="q1">Do you even care about acting morally?</label>
+                <md-filled-button id="q1_b1" type="button" data-value="yes">Yes</md-filled-button>
+                <md-filled-button id="q1_b2" type="button" data-value="no">No</md-filled-button>
             </div>
 
-            <div class="question" data-id="q1_it">
-                <label>È importante per te agire moralmente?</label>
-                <md-filled-button type="button" data-value="yes">Si</md-filled-button>
-                <md-filled-button type="button" data-value="no">No</md-filled-button>
+            <!-- End screen 1 -->
+            <div class="question" data-id="end1">
+                <label id="end1">That is good to acknowledge. Probably not the best for the wellbeing of the community but at least we know</label>
+                <md-filled-button id="end1_b" type="button">Submit answer</md-filled-button>
             </div>
 
             <!-- Question 2 -->
             <div class="question" data-id="q2">
-                <label>Are you confident that all of your moral actions, decisions, and opinions reflect your idea of morality, and could you backtrace the moral reasoning behind them to the roots of your morality?</label>
-                <md-filled-button type="button" data-value="yes">Yes</md-filled-button>
-                <md-filled-button type="button" data-value="no">No</md-filled-button>
+                <label id="q2">Are you confident that all of your moral actions, decisions, and opinions reflect your idea of morality, and could you backtrace the moral reasoning behind them to the roots of your morality?</label>
+                <md-filled-button id="q2_b1" type="button" data-value="yes">Yes</md-filled-button>
+                <md-filled-button id="q2_b2" type="button" data-value="no">No</md-filled-button>
             </div>
 
-            <div class="question" data-id="q2_it">
-                <label>Sei sicuro che tutte le tue azioni, decisioni e opinioni morali riflettano la tua idea di moralità, e potresti risalire al ragionamento morale che le ha generate?</label>
-                <md-filled-button type="button" data-value="yes">Si</md-filled-button>
-                <md-filled-button type="button" data-value="no">No</md-filled-button>
+            <!-- End screen 2 -->
+            <div class="question" data-id="end2">
+                <label id="end2">Very well. If you are sure about what you stated we are all set</label>
+                <md-filled-button id="end2_b" type="button">Submit answer</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 1 -->
             <div class="question" data-id="inter7">
-                <label>Now that the lame ones are out along with the goat's let's begin.</label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter7_it">
-                <label>Ora che i deboli sono fuori insieme ai goat iniziamo.</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <label id="inter7">Now that the lame ones are out along with the goat's let's begin.</label>
+                <md-filled-button id="inter7_b" type="button">Next</md-filled-button>
             </div>
 
             <!-- Question 3 -->
             <div class="question" data-id="q3">
-                <label>Would you consider your moral to be more..</label>
-                <md-filled-button type="button" data-value="deontological">Deontological</md-filled-button><br>
-                <md-filled-button type="button" data-value="consequentialist">Consequentialist</md-filled-button><br>
-                <md-filled-button type="button" data-value="egoist">Egoist</md-filled-button><br>
-                <md-filled-button type="button" data-value="dunno">I'm not sure or<br>I don't know what they mean</md-filled-button>
+                <label id="q3">Would you consider your moral to be more..</label>
+                <md-filled-button id="q3_b1" type="button" data-value="deontological">Deontological</md-filled-button><br>
+                <md-filled-button id="q3_b2" type="button" data-value="consequentialist">Consequentialist</md-filled-button><br>
+                <md-filled-button id="q3_b3" type="button" data-value="egoist">Egoist</md-filled-button><br>
+                <md-filled-button id="q3_b4" type="button" data-value="dunno">I'm not sure or<br>I don't know what they mean</md-filled-button>
             </div>
 
-            <div class="question" data-id="q3_it">
-                <label>Considereresti la tua morale più..</label>
-                <md-filled-button type="button" data-value="deontological">Deontologica</md-filled-button><br>
-                <md-filled-button type="button" data-value="consequentialist">Consequenzialista</md-filled-button><br>
-                <md-filled-button type="button" data-value="egoist">Egoista</md-filled-button><br>
-                <md-filled-button type="button" data-value="dunno">Non sono sicuro o<br>non so cosa significhino</md-filled-button>
+            <!-- End screens 3 -->
+
+
+            <div class="question" data-id="end3d">
+                <label id="end3d"></label>
+                <md-filled-button id="end3d_b" type="button">Submit answer</md-filled-button>
+            </div>
+
+            <div class="question" data-id="end3c">
+                <label id="end3c">PLACE HOLDER FOR CONSEQUENTIALISM</label>
+                <md-filled-button id="end3c_b" type="button">Submit answer</md-filled-button>
+            </div>
+
+            <div class="question" data-id="end3e">
+                <label id="end3e">Good that you're aware of that. Honestly not something that requires much reasoning so if you are sure about that choice you are probably already acting morally</label>
+                <md-filled-button id="end3e_b" type="button">Submit answer</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 2 -->
             <div class="question" data-id="inter8">
-                <label>
+                <label id="inter8">
                     <span style="font-size: 1.3em;"><strong>DEONTOLOGY:<br><br></strong></span>This ethical theory involves a set of duties (moral principles) that an individual should fulfill in order to act morally.<br><br>
                     <strong>That is:</strong> some things are good, some things are bad, always.<br><br>
                     <strong>Examples:</strong> stealing is wrong, killing is wrong...<br><br>
@@ -332,25 +301,12 @@
                     <a href="https://www.britannica.com/topic/deontological-ethics" target="_blank">[2]</a>,
                     <a href="https://en.wikipedia.org/wiki/Deontology" target="_blank">[3]</a>
                 </label>
-                <md-filled-button type="button">Next</md-filled-button>
+                <md-filled-button id="inter8_b" type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter8_it">
-                <label>
-                    <span style="font-size: 1.3em;"><strong>DEONTOLOGIA:<br><br></strong></span>Questa teoria etica coinvolge un insieme di doveri (principi morali) che un individuo dovrebbe rispettare per agire moralmente.<br><br>
-                    <strong>Cioè:</strong> alcune cose sono buone, alcune cose sono cattive, sempre.<br><br>
-                    <strong>Esempi:</strong> rubare è sbagliato, uccidere è sbagliato...<br><br>
-                    <strong>Possibili problemi:</strong> come affrontiamo una situazione in cui due principi collidono? Chi sceglie l'insieme di principi?<br><br>
-                    <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/ethics-deontological/" target="_blank">[1]</a>,
-                    <a href="https://www.britannica.com/topic/deontological-ethics" target="_blank">[2]</a>,
-                    <a href="https://en.wikipedia.org/wiki/Deontology" target="_blank">[3]</a>
-                </label>
-                <md-filled-button type="button">Avanti</md-filled-button>
-            </div>
-
-            <!-- Intermediate Screen 2 -->
+            <!-- Intermediate Screen 3 -->
             <div class="question" data-id="inter9">
-                <label>
+                <label id="inter9">
                     <span style="font-size: 1.3em;"><strong>CONSEQUENTIALISM:<br><br></strong></span>This ethical theory wants that actions should be evaluated based on their consequences, specifically on the sum of all "good" produced by each of them.<br><br>
                     <strong>That is:</strong> good or wrong depends on the context and before each action one should try to predict the sum of all consequences (based on how you see this you could also consider very indirect consequences - perceived intention could be part of them).<br><br>
                     <strong>Examples:</strong> nuking Israel could save Palestine and thus be a good thing.<br><br>
@@ -360,26 +316,12 @@
                     <a href="https://www.britannica.com/topic/consequentialism" target="_blank">[3]</a>,
                     <a href="https://en.wikipedia.org/wiki/Consequentialism" target="_blank">[4]</a>
                 </label>
-                <md-filled-button type="button">Next</md-filled-button>
+                <md-filled-button id="inter9_b" type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter9_it">
-                <label>
-                    <span style="font-size: 1.3em;"><strong>CONSEQUENZIALISMO:<br><br></strong></span>Questa teoria etica vuole che le azioni siano valutate in base alle loro conseguenze, in particolare alla somma di tutto il "bene" prodotto da ciascuna di esse.<br><br>
-                    <strong>Cioè:</strong> bene o male dipende dal contesto e prima di ogni azione si dovrebbe cercare di prevedere la somma di tutte le conseguenze (in base a come vedi questo potresti anche considerare conseguenze molto indirette - l'intenzione percepita potrebbe farne parte).<br><br>
-                    <strong>Esempi:</strong> bombardare Israele potrebbe salvare la Palestina e quindi essere una cosa buona.<br><br>
-                    <strong>Possibili problemi:</strong> come prevediamo tutte le conseguenze? Cos'è il "bene" comunque?<br><br>
-                    <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/consequentialism/" target="_blank">[1]</a>,
-                    <a href="https://iep.utm.edu/consequentialism-utilitarianism/" target="_blank">[2]</a>,
-                    <a href="https://www.britannica.com/topic/consequentialism" target="_blank">[3]</a>,
-                    <a href="https://en.wikipedia.org/wiki/Consequentialism" target="_blank">[4]</a>
-                </label>
-                <md-filled-button type="button">Avanti</md-filled-button>
-            </div>
-
-            <!-- Intermediate Screen 3 -->
+            <!-- Intermediate Screen 4 -->
             <div class="question" data-id="inter10">
-                <label>
+                <label id="inter10">
                     <span style="font-size: 1.3em;"><strong>EGOISM:<br><br></strong></span>It's a specific consequentialist theory where "good" is calculated based only on the agent's payoff.<br><br>
                     <strong>That is:</strong> you do what brings you more of whatever you want.<br><br>
                     <strong>Examples:</strong> I eat the last piece of cake because I want it.<br><br>
@@ -387,42 +329,33 @@
                     <strong>More info:</strong> <a href="https://plato.stanford.edu/entries/egoism/" target="_blank">[1]</a>,
                     <a href="https://en.wikipedia.org/wiki/Egoism" target="_blank">[2]</a>
                 </label>
-                <md-filled-button type="button">Next</md-filled-button>
-            </div>
-
-            <div class="question" data-id="inter10_it">
-                <label>
-                    <span style="font-size: 1.3em;"><strong>EGOISMO:<br><br></strong></span>È una teoria consequenzialista specifica in cui il "bene" è calcolato solo in base al guadagno dell'agente.<br><br>
-                    <strong>Cioè:</strong> fai ciò che ti porta più di ciò che vuoi.<br><br>
-                    <strong>Esempi:</strong> mangio l'ultimo pezzo di torta perché lo voglio.<br><br>
-                    <strong>Possibili problemi:</strong> puoi capirli.<br><br>
-                    <strong>Maggiori informazioni:</strong> <a href="https://plato.stanford.edu/entries/egoism/" target="_blank">[1]</a>,
-                    <a href="https://en.wikipedia.org/wiki/Egoism" target="_blank">[2]</a>
-                </label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+                <md-filled-button id="inter10_b" type="button">Next</md-filled-button>
             </div>
 
             <!-- Intermediate Screen 5 -->
              <div class="question" data-id="inter11">
-                <label>Now back to the original question..</label>
-                <md-filled-button type="button">Next</md-filled-button>
+                <label id="inter11">Now back to the original question..</label>
+                <md-filled-button id="inter11_b" type="button">Next</md-filled-button>
             </div>
 
-            <div class="question" data-id="inter11_it">
-                <label>Adesso torniamo alla domanda originale..</label>
-                <md-filled-button type="button">Avanti</md-filled-button>
+            <!-- Question 3bis -->
+            <div class="question" data-id="q3b">
+                <label id="q3b">Would you consider your moral to be more..</label>
+                <md-filled-button id="q3b_b1" type="button" data-value="deontological">Deontological</md-filled-button><br>
+                <md-filled-button id="q3b_b2" type="button" data-value="consequentialist">Consequentialist</md-filled-button><br>
+                <md-filled-button id="q3b_b3" type="button" data-value="egoist">Egoist</md-filled-button>
             </div>
         </form>
 
         <!-- Thank You Message -->
         <div class="thank-you">
-            <p>Thank you for completing the survey!</p>
+            <p id="thank-you">Thank you for completing the survey!</p>
         </div>
         
         <!-- Loading Screen -->
         <div class="loading-screen">
             <md-circular-progress indeterminate></md-circular-progress>
-            <p>Submitting your response...</p>
+            <p id="loading-screen">Submitting your response...</p>
         </div>
     </div>
 
@@ -430,11 +363,152 @@
         <a href="https://github.com/Piessa/MoralSurvey/blob/main/LICENSE.md" target="_blank"><img class="img" src="https://i.seadn.io/gae/KTMWrPShvGnUrsdK6DtFEbgUFTC0CX8ZOKPNAQ6UuamoDKtrNrMUYozamRN_NAGnwV1qhAkMbh3cXX9jmzhs7PNEvM9qjMYfWCTY-iU?auto=format&dpr=1&w=1000" alt="Logo" style="border-radius: 50%; object-fit: cover;"></a>
         <h2>Made by Piessa.</h2>
     </div>
-
-    
-
     
     <script>
+        const translations = {
+                'inter0': {
+                    it: "Ciao, benvenutə. Grazie per essere qui :)"
+                },
+                'inter0_b': {
+                    it: "Avanti"
+                },
+                'inter1': {
+                    it: "A cosa serve?"
+                },
+                'inter1_b': {
+                    it: "Avanti"
+                },
+                'inter2': {
+                    it: "Quello che segue ha lo scopo di farti riflettere sui tuoi principi (se ne hai) e su quanto validamente stai ragionando per seguirli."
+                },
+                'inter2_b': {
+                    it: "Avanti"
+                },
+                'inter3': {
+                    it: "Questo significa che agire moralmente sarà definito d'ora in poi come agire seguendo un ragionamento valido radicato nella propria moralità. (No, la moralità non è universale)"
+                },
+                'inter3_b': {
+                    it: "Avanti"
+                },
+                'inter4': {
+                    it: "Solo per essere sulla stessa lunghezza d'onda.."
+                },
+                'inter4_b': {
+                    it: "Avanti"
+                },
+                'inter5': {
+                    it: "Agire moralmente richiede due cose:<br><br> - Un insieme di principi morali (o un unico principio che governa tutto)<br> - Un ragionamento morale adeguato (valido) per seguire quei (o quel) principio."
+                },
+                'inter5_b': {
+                    it: "Avanti"
+                },
+                'inter6': {
+                    it: "Esamineremo molto brevemente entrambi. Ma prima.."
+                },
+                'inter6_b': {
+                    it: "Avanti"
+                },
+                'q1': {
+                    it: "Ti interessa agire moralmente?"
+                },
+                'q1_b1': {
+                    it: "Sì"
+                },
+                'q1_b2': {
+                    it: "No"
+                },
+                'end1': {
+                    it: "È bello riconoscerlo. Probabilmente non il meglio per il benessere della comunità ma almeno lo sappiamo"
+                },
+                'end1_b': {
+                    it: "Invia risposta"
+                },
+                'q2': {
+                    it: "Sei sicuro che tutte le tue azioni, decisioni e opinioni morali riflettano la tua idea di moralità, e potresti risalire al ragionamento morale che c'è dietro fino alle radici della tua moralità?"
+                },
+                'q2_b1': {
+                    it: "Sì"
+                },
+                'q2_b2': {
+                    it: "No"
+                },
+                'end2': {
+                    it: "Molto bene. Se sei sicuro di ciò che hai dichiarato siamo a posto"
+                },
+                'end2_b': {
+                    it: "Invia risposta"
+                },
+                'inter7': {
+                    it: "Ora che i deboli sono fuori insieme alle capre cominciamo."
+                },
+                'inter7_b': {
+                    it: "Avanti"
+                },
+                'q3': {
+                    it: "Considereresti la tua morale più.."
+                },
+                'q3_b1': {
+                    it: "Deontologica"
+                },
+                'q3_b2': {
+                    it: "Conseguenzialista"
+                },
+                'q3_b3': {
+                    it: "Egoista"
+                },
+                'q3_b4': {
+                    it: "Non sono sicuro o<br>non so cosa intendano"
+                },
+                'end3e': {
+                    it: "Bene che tu ne sia consapevole. Onestamente non è qualcosa che richiede molto ragionamento quindi se sei sicuro di quella scelta probabilmente stai già agendo moralmente"
+                },
+                'end3e_b': {
+                    it: "Invia risposta"
+                },
+                'inter8': {
+                    it: "<span style='font-size: 1.3em;'><strong>DEONTOLOGIA:<br><br></strong></span>Questa teoria etica prevede un insieme di doveri (principi morali) che un individuo dovrebbe rispettare per agire moralmente.<br><br><strong>Questo significa:</strong> alcune cose sono buone, alcune cose sono cattive, sempre.<br><br><strong>Esempi:</strong> rubare è sbagliato, uccidere è sbagliato...<br><br><strong>Problemi possibili:</strong> come affrontiamo una situazione in cui due principi collidono? Chi sceglie l'insieme di principi?<br><br><strong>Ulteriori informazioni:</strong> <a href='https://plato.stanford.edu/entries/ethics-deontological/' target='_blank'>[1]</a>, <a href='https://www.britannica.com/topic/deontological-ethics' target='_blank'>[2]</a>, <a href='https://en.wikipedia.org/wiki/Deontology' target='_blank'>[3]</a>"
+                },
+                'inter8_b': {
+                    it: "Avanti"
+                },
+                'inter9': {
+                    it: "<span style='font-size: 1.3em;'><strong>CONSEGUENZIALISMO:<br><br></strong></span>Questa teoria etica vuole che le azioni siano valutate in base alle loro conseguenze, specificamente alla somma di tutto il 'bene' prodotto da ciascuna di esse.<br><br><strong>Questo significa:</strong> il bene o"
+                },
+                'inter9_b': {
+                    it: "Avanti"
+                },
+                'inter10': {
+                    it: "<span style='font-size: 1.3em;'><strong>EGOISMO:<br><br></strong></span>È una teoria consequenzialista specifica in cui il 'bene' è calcolato solo in base al guadagno dell'agente.<br><br><strong>Questo significa:</strong> fai ciò che ti porta più di ciò che desideri.<br><br><strong>Esempi:</strong> mangio l'ultimo pezzo di torta perché lo voglio.<br><br><strong>Problemi possibili:</strong> puoi capirli.<br><br><strong>Ulteriori informazioni:</strong> <a href='https://plato.stanford.edu/entries/egoism/' target='_blank'>[1]</a>, <a href='https://en.wikipedia.org/wiki/Egoism' target='_blank'>[2]</a>"
+                },
+                'inter10_b': {
+                    it: "Avanti"
+                },
+                'inter11': {
+                    it: "Ora torniamo alla domanda originale.."
+                },
+                'inter11_b': {
+                    it: "Avanti"
+                },
+                'q3b': {
+                    it: "Considereresti la tua morale più.."
+                },
+                'q3b_b1': {
+                    it: "Deontologica"
+                },
+                'q3b_b2': {
+                    it: "Conseguenzialista"
+                },
+                'q3b_b3': {
+                    it: "Egoista"
+                },
+                'loading-screen': {
+                    it: "Invio della tua risposta..."
+                },
+                'thank-you': {
+                    it: "Grazie per aver completato il sondaggio!"
+                }
+                // Add all other translation strings here...
+            };
         const questions = document.querySelectorAll('.question');
         const form = document.getElementById('survey-form');
         const thankYou = document.querySelector('.thank-you');
@@ -459,6 +533,15 @@
             return answers;
         };
 
+        const translate = (lang) => {
+            if (lang === 'en') return;
+            for (let key in translations) {
+                let value = translations[key];
+                let content = value[lang];
+                document.getElementById(key).innerHTML = content;
+            }
+        };
+
         const submitSurvey = (answers) => {
             // Show loading screen
             form.style.display = 'none';
@@ -472,7 +555,7 @@
                 formData.append(key, answers[key]);
             }
 
-            fetch("https://script.google.com/macros/s/AKfycby-uj7A1-KNQmYPBeQp5kmaZ47nlfS_5M9TgsyU2oVI8M-G9Yx08caifUMiSUJgpGZg/exec", {
+            fetch("https://script.google.com/macros/s/AKfycbzkblEuyD2M9NoCu5rVuUFVxeaxRlwukT3MmtbKuADPl0WQXUHbjX41AV9HyCkoD3I/exec", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -494,34 +577,19 @@
             });
         };
 
-        // Step 1: Define a configuration object for transitions
         const transitions = {
-            lang: {
-                en: 'inter0',
-                it: 'inter0_it'
-            },
             inter0: 'inter1',
-            inter0_it: 'inter1_it',
             inter1: 'inter2',
-            inter1_it: 'inter2_it',
             inter2: 'inter3',
-            inter2_it: 'inter3_it',
             inter3: 'inter4',
-            inter3_it: 'inter4_it',
             inter4: 'inter5',
-            inter4_it: 'inter5_it',
             inter5: 'inter6',
-            inter5_it: 'inter6_it',
             inter6: 'q1',
-            inter6_it: 'q1_it',
             inter7: 'q3',
-            inter7_it: 'q3_it',
             inter8: 'inter9',
-            inter8_it: 'inter9_it',
             inter9: 'inter10',
-            inter9_it: 'inter10_it',
             inter10: 'inter11',
-            inter10_it: 'inter11_it'
+            inter11: 'q3b',
         };
 
         document.querySelectorAll('.question md-filled-button').forEach((button) => {
@@ -531,46 +599,53 @@
                 const currentId = currentQuestion.dataset.id;
                 if (selectedValue) answers[currentId] = selectedValue;
 
-                // Step 2: Use our transitions object for next screen if it exists
                 const next = transitions[currentId]?.[selectedValue] || transitions[currentId];
                 if (next) {
                     showQuestion(next);
                     return;
                 }
 
-                // Step 3: Keep other logic unchanged for final survey submission
-                if (currentId === 'q1' || currentId === 'q1_it') {
+                if (currentId === 'lang') {
+                    answers.lang = selectedValue;
+                    translate(selectedValue);
+                    showQuestion('inter0');
+                } 
+                if (currentId === 'q1') {
                     if (selectedValue === 'yes') {
-                        if (answers.lang === 'en') {
-                            showQuestion('q2');
-                        } else {
-                            showQuestion('q2_it');
+                        showQuestion('q2');
+                    } else {
+                        showQuestion('end1');
+                }} else if (currentId === 'end1') {
+                    const answers = collectAnswers();
+                    submitSurvey(answers);
+                } else if (currentId === 'q2') {
+                    if (selectedValue === 'yes') {
+                        showQuestion('end2');
+                    } else {
+                        showQuestion('inter7');
                         }
-                    } else {
-                        const answers = collectAnswers();
-                        submitSurvey(answers);
-                    }
-                } else if (currentId === 'q2' || currentId === 'q2_it') {
-                    if (selectedValue === 'yes') {
-                        const answers = collectAnswers();
-                        submitSurvey(answers);
-                    } else {
-                        if (answers.lang === 'en') {
-                            showQuestion('inter7');
-                        } else {
-                            showQuestion('inter7_it');
-                    }}
-                } else if (currentId === 'q3' || currentId === 'q3_it') {
+                } else if (currentId === 'end2') {
+                    const answers = collectAnswers();
+                    submitSurvey(answers);
+                } else if (currentId === 'q3') {
                     if (selectedValue === 'dunno') {
-                        if (answers.lang === 'en') {
-                            showQuestion('inter8');
-                        } else {
-                            showQuestion('inter8_it');
-                        }
+                        showQuestion('inter8');
+                    } else if (selectedValue === 'egoist') {
+                        showQuestion('end3e');
                     } else {
                         const answers = collectAnswers();
                         submitSurvey(answers);
                     }
+                } else if (currentId === 'q3b') {
+                    if (selectedValue === 'egoist') {
+                        showQuestion('end3e');
+                    } else {
+                        const answers = collectAnswers();
+                        submitSurvey(answers);
+                    }
+                } else if (currentId === 'end3e') {
+                    const answers = collectAnswers();
+                    submitSurvey(answers);
                 }
             });
         });
