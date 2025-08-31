@@ -7,11 +7,8 @@ License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main
 ------------------------------------------
 -->
     <head>
-        <meta http-equiv="cache-control" content="no-cache, must-revalidate, post-check=0, pre-check=0" />
-        <meta http-equiv="cache-control" content="max-age=0" />
-        <meta http-equiv="expires" content="0" />
-        <meta http-equiv="expires" content="Tue, 01 Jan 1980 1:00:00 GMT" />
-        <meta http-equiv="pragma" content="no-cache" />
+        <meta http-equiv="cache-control" content="public, max-age=3600" />
+        <meta http-equiv="expires" content="3600" />
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Moral Journey Survey</title>
@@ -181,8 +178,6 @@ License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main
         }
     </style>
 </head>
-
-    </head>
     <body>
     <div class="container">
         <form id="survey-form">
@@ -472,7 +467,7 @@ License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main
                     it: "Avanti"
                 },
                 'inter9': {
-                    it: "<span style='font-size: 1.3em;'><strong>CONSEGUENZIALISMO:<br><br></strong></span>Questa teoria etica vuole che le azioni siano valutate in base alle loro conseguenze, specificamente alla somma di tutto il 'bene' prodotto da ciascuna di esse.<br><br><strong>Questo significa:</strong> il bene o"
+                    it: "<span style='font-size: 1.3em;'><strong>CONSEGUENZIALISMO:<br><br></strong></span>Questa teoria etica vuole che le azioni siano valutate in base alle loro conseguenze, specificamente alla somma di tutto il 'bene' prodotto da ciascuna di esse.<br><br><strong>Questo significa:</strong> il bene o il male dipende dal contesto e prima di ogni azione si dovrebbe cercare di prevedere la somma di tutte le conseguenze (in base a come vedi questo potresti anche considerare conseguenze molto indirette - l'intenzione percepita potrebbe farne parte).<br><br><strong>Esempi:</strong> bombardare Israele potrebbe salvare la Palestina e quindi essere una cosa buona.<br><br><strong>Problemi possibili:</strong> come prevediamo tutte le conseguenze? Cos'è il 'bene' comunque?<br><br><strong>Ulteriori informazioni:</strong> <a href='https://plato.stanford.edu/entries/consequentialism/' target='_blank'>[1]</a>, <a href='https://iep.utm.edu/consequentialism-utilitarianism/' target='_blank'>[2]</a>, <a href='https://www.britannica.com/topic/consequentialism' target='_blank'>[3]</a>, <a href='https://en.wikipedia.org/wiki/Consequentialism' target='_blank'>[4]</a>"
                 },
                 'inter9_b': {
                     it: "Avanti"
@@ -535,11 +530,12 @@ License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main
 
         const translate = (lang) => {
             if (lang === 'en') return;
-            for (let key in translations) {
-                let value = translations[key];
-                let content = value[lang];
-                document.getElementById(key).innerHTML = content;
-            }
+            Object.entries(translations).forEach(([key, value]) => {
+                const element = document.getElementById(key);
+                if (element && value[lang]) {
+                    element.innerHTML = value[lang];
+                }
+            });
         };
 
         const submitSurvey = (answers) => {
@@ -549,10 +545,6 @@ License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main
 
             if (test) {
                 answers.lang = 'test';
-            }
-            const formData = new FormData();
-            for (const key in answers) {
-                formData.append(key, answers[key]);
             }
 
             fetch("https://script.google.com/macros/s/AKfycbzkblEuyD2M9NoCu5rVuUFVxeaxRlwukT3MmtbKuADPl0WQXUHbjX41AV9HyCkoD3I/exec", {
@@ -605,47 +597,43 @@ License at: https://raw.githubusercontent.com/Piessa/MoralSurvey/refs/heads/main
                     return;
                 }
 
+                // Handle language selection
                 if (currentId === 'lang') {
                     answers.lang = selectedValue;
                     translate(selectedValue);
                     showQuestion('inter0');
+                    return;
                 } 
-                if (currentId === 'q1') {
-                    if (selectedValue === 'yes') {
-                        showQuestion('q2');
-                    } else {
-                        showQuestion('end1');
-                }} else if (currentId === 'end1') {
-                    const answers = collectAnswers();
-                    submitSurvey(answers);
-                } else if (currentId === 'q2') {
-                    if (selectedValue === 'yes') {
-                        showQuestion('end2');
-                    } else {
-                        showQuestion('inter7');
+                
+                // Handle question logic
+                switch (currentId) {
+                    case 'q1':
+                        showQuestion(selectedValue === 'yes' ? 'q2' : 'end1');
+                        break;
+                    case 'q2':
+                        showQuestion(selectedValue === 'yes' ? 'end2' : 'inter7');
+                        break;
+                    case 'q3':
+                        if (selectedValue === 'dunno') {
+                            showQuestion('inter8');
+                        } else if (selectedValue === 'egoist') {
+                            showQuestion('end3e');
+                        } else {
+                            submitSurvey(collectAnswers());
                         }
-                } else if (currentId === 'end2') {
-                    const answers = collectAnswers();
-                    submitSurvey(answers);
-                } else if (currentId === 'q3') {
-                    if (selectedValue === 'dunno') {
-                        showQuestion('inter8');
-                    } else if (selectedValue === 'egoist') {
-                        showQuestion('end3e');
-                    } else {
-                        const answers = collectAnswers();
-                        submitSurvey(answers);
-                    }
-                } else if (currentId === 'q3b') {
-                    if (selectedValue === 'egoist') {
-                        showQuestion('end3e');
-                    } else {
-                        const answers = collectAnswers();
-                        submitSurvey(answers);
-                    }
-                } else if (currentId === 'end3e') {
-                    const answers = collectAnswers();
-                    submitSurvey(answers);
+                        break;
+                    case 'q3b':
+                        if (selectedValue === 'egoist') {
+                            showQuestion('end3e');
+                        } else {
+                            submitSurvey(collectAnswers());
+                        }
+                        break;
+                    case 'end1':
+                    case 'end2':
+                    case 'end3e':
+                        submitSurvey(collectAnswers());
+                        break;
                 }
             });
         });
